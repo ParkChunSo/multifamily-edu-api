@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/**/**")//url에 대한 권한부여
+                .antMatchers("/**")//url에 대한 권한부여
                 .permitAll()
                 .and()
         .formLogin()//로그인 설정

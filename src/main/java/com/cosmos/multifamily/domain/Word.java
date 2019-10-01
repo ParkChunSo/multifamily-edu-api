@@ -2,6 +2,7 @@ package com.cosmos.multifamily.domain;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 
 @Entity
-@Getter
+@Getter @NoArgsConstructor
 public class Word {
     @Id
     @Column(name = "name")
