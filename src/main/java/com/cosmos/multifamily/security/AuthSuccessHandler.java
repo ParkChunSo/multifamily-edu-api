@@ -1,8 +1,10 @@
 package com.cosmos.multifamily.security;
 
+import com.cosmos.multifamily.config.UserAdapter;
 import com.cosmos.multifamily.domain.User;
 import com.cosmos.multifamily.repository.UserRepository;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -33,12 +35,14 @@ public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson customGson = gsonBuilder.registerTypeAdapter(User.class, new UserAdapter()).create();
         response.setStatus(HttpServletResponse.SC_OK);
         Object principal = authentication.getPrincipal();
         UserDetails userDetails = (UserDetails) principal;
         User user = userRepository.findUserByUserId(userDetails.getUsername());
         user.setResponse("1");
-        response.getWriter().print(gson.toJson(user));
+        response.getWriter().print(customGson.toJson(user));
         response.getWriter().flush();
     }
 }

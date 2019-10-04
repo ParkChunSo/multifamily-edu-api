@@ -14,7 +14,7 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
-public class User {
+public class User{
 
     @Id
     @Column(nullable = false)
@@ -47,9 +47,5 @@ public class User {
         this.userPw = userPw;
         this.name = name;
         this.mobile = mobile;
-    }
-
-    public void setUserPw(String userPw) {
-        this.userPw = userPw;
     }
 }
